@@ -12,12 +12,15 @@
                             <strong>{{ $message }}</strong>
                     </div>
                 @endif
+                <div class="card-body">
+                    <a href="{{route('admin.posts.create')}}"><button type="button" class="btn btn-info">Crea un nuovo post</button></a>
+                </div>
 
                 <div class="card-body">
                     @foreach ($posts as $post)
                         <h1>{{$post->title}}</h1>
                         <p><small>{{$post->updated_at}}</small></p>
-                        <button type="button" class="btn btn-info"><a href="{{route('admin.posts.show', $post->id)}}">Visualizza</a></button>
+                        <a href="{{route('admin.posts.show', $post->id)}}"><button type="button" class="btn btn-info">Visualizza</button></a>
                     @endforeach
                 </div>
             </div>

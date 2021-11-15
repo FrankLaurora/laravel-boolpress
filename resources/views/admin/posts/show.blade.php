@@ -11,12 +11,12 @@
                         <h1>{{$post->title}}</h1>
                         <p><small><strong>Creazione:</strong>{{$post->updated_at}}<strong> - Slug:</strong> {{$post->slug}}</small></p>
                         <p>{{$post->content}}</p>
-                        <button type="button" class="btn btn-info"><a href="{{route('admin.posts.index')}}">Torna indietro</a></button>
-                        <button type="button" class="btn btn-warning">Modifica</button>
+                        <a href="{{route('admin.posts.index')}}"><button type="button" class="btn btn-info">Torna indietro</button></a>
+                        <a href="{{route('admin.posts.edit', $post->id)}}"><button type="button" class="btn btn-warning">Modifica</button></a>
                         <form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Elimina</button>
+                            <a href="#"><button type="submit" class="btn btn-danger">Elimina</button></a>
                         </form>
                 </div>
             </div>
