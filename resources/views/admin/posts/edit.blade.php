@@ -15,7 +15,7 @@
                         <label for="title">Titolo</label>
                         <input type="text" class="form-control" id="title" name="title" value="{{old('title') ?? $post->title}}" placeholder="Inserisci il titolo">
                         @if ($errors->has('title'))
-                            <span class="text-danger">{{ $errors->first('title') }}</span>
+                            <div class="alert alert-danger">{{ $errors->first('title') }}</div>
                         @endif
                     </div>
 
@@ -23,7 +23,7 @@
                         <label for="content">Corpo del testo</label>
                         <textarea class="form-control" id="content" name="content" rows="3" placeholder="Inserisci il testo dell'articolo">{{old('content') ?? $post->content}}</textarea>
                         @if ($errors->has('content'))
-                            <span class="text-danger">{{ $errors->first('content') }}</span>
+                            <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                         @endif
                     </div>
 
