@@ -27,6 +27,19 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        <label for="category">Categoria</label>
+                        <select class="form-control" id="category" name="category_id">
+                            <option value="">Seleziona una categoria</option>
+                            @foreach ($categories as $category)
+                                <option {{old('category_id') == $category->id ? 'selected' : null}} value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('category_id'))
+                            <div class="alert alert-danger">{{ $errors->first('category_id') }}</div>
+                        @endif
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Invia</button>
                 </form>
 
