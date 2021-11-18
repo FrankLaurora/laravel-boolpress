@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {   
     protected $validationRules = [
         'title' => 'string|required|max:100',
         'content' => 'string|required',
-        'category_id' => 'nullable|exists:categories,id'
+        'category_id' => 'nullable|exists:categories,id',
+        'tags' => 'exists:tags,id'
     ];
 
     /**
@@ -37,7 +39,9 @@ class PostController extends Controller
     {
         $categories = Category::all();
 
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -57,6 +61,8 @@ class PostController extends Controller
         $newPost->slug = $this->getSlug($newPost->title);
 
         $newPost->save();
+
+        $newPost->tags()->attach($request->tags);
 
         return redirect()->route('admin.posts.index')->with('success', "Il post è stato creato correttamente.");
     }
@@ -82,7 +88,9 @@ class PostController extends Controller
     {
         $categories = Category::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -102,8 +110,9 @@ class PostController extends Controller
         
         $post->fill($request->all());
 
-
         $post->save();
+
+        $post->tags()->sync($request->tags);
         
         return redirect()->route('admin.posts.index')->with('success', "L'articolo {$post->id} è stato modificato correttamente.");
     }

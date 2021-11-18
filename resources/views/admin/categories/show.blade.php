@@ -11,13 +11,17 @@
                         <h1>{{$category->name}}</h1>
                         <p><small><strong>Creazione:</strong>{{$category->updated_at}}<strong> - Slug:</strong> {{$category->slug}}</small></p>
 
+                        <h3>Post appartenenti a questa categoria:</h3>
+                        <ul>
+                            @if ($category['posts']->isNotEmpty())
+                                @foreach ($category['posts'] as $post)
+                                    <li>{{$post->title}}</li>                  
+                                @endforeach
+                            @else
+                                <p>Non ci sono post associati a questa categoria.</p>
+                            @endif
+                        </ul>
                         <a href="{{route('admin.categories.index')}}"><button type="button" class="btn btn-info">Torna indietro</button></a>
-                        {{-- <a href="{{route('admin.categories.edit', $category->id)}}"><button type="button" class="btn btn-warning">Modifica</button></a>
-                        <form action="{{route('admin.categories.destroy', $category->id)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <a href="#"><button type="submit" class="btn btn-danger">Elimina</button></a> --}}
-                        </form>
                 </div>
             </div>
         </div>

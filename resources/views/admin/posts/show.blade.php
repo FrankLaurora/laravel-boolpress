@@ -10,8 +10,19 @@
                 <div class="card-body">
                         <h1>{{$post->title}}</h1>
                         <p><small><strong>Creazione:</strong>{{$post->updated_at}}<strong> - Slug:</strong> {{$post->slug}}</small></p>
+                        
                         <p>{{$post->content}}</p>
+                        
                         <p><small><strong>Categoria: </strong>{{$post->category['name'] ?? "nessuna categoria"}}</p>
+                        @if ($post->tags->isNotEmpty())
+                            <p>
+                                <small><strong>Tags:</strong></small>
+                                @foreach ($post->tags as $tag)
+                                    <span class="badge badge-info">{{$tag->name}}</span>
+                                @endforeach
+                            </p>    
+                        @endif
+                        
                         <a href="{{route('admin.posts.index')}}"><button type="button" class="btn btn-info">Torna indietro</button></a>
                         <a href="{{route('admin.posts.edit', $post->id)}}"><button type="button" class="btn btn-warning">Modifica</button></a>
                         <form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">

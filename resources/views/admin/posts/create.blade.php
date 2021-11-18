@@ -40,6 +40,20 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        @foreach ($tags as $tag)
+                            <div class="form-check">
+                                <input {{in_array($tag->id, old('tags', [])) ? 'checked' : null}} class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->id}}" id="tag-{{$tag->id}}">
+                                <label class="form-check-label" for="tag-{{$tag->id}}">
+                                    {{$tag->name}}
+                                </label>                            
+                            </div>
+                        @endforeach
+                        @if ($errors->has('tags'))
+                            <div class="alert alert-danger">{{ $errors->first('tags') }}</div>
+                        @endif
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Invia</button>
                 </form>
 
