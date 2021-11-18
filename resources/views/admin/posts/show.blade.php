@@ -13,7 +13,7 @@
                         
                         <p>{{$post->content}}</p>
                         
-                        <p><small><strong>Categoria: </strong>{{$post->category['name'] ?? "nessuna categoria"}}</p>
+                        <p><small><strong>Categoria: </strong>{{$post->category['name'] ?? "nessuna categoria"}}</small></p>
                         @if ($post->tags->isNotEmpty())
                             <p>
                                 <small><strong>Tags:</strong></small>
